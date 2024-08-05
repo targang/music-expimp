@@ -1,7 +1,6 @@
 import csv
 import os
 import sys
-import time
 from tqdm import tqdm
 
 import dotenv
@@ -28,8 +27,8 @@ TOKEN = os.environ["YANDEX_TOKEN"]
 client: Client = Client(TOKEN).init()
 
 counter = 0
-revision = os.environ["YANDEX_REVISION"]
-for data_track in tqdm(data[205:]):
+revision = int(os.environ["YANDEX_REVISION"])
+for data_track in tqdm(data):
     search = client.search(" ".join(data_track), type_="track")
     # трек не найден
     if not search or not search.tracks or search.tracks.total == 0:
